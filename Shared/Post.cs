@@ -8,6 +8,7 @@ namespace scribal.Shared
 {
     public class Post
     {
+        public int Id { get; set; }
         public DateTime DateTime { get; set; }
         public User Author { get; set; }
         public string Content { get; set; }
