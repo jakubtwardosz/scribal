@@ -1,7 +1,8 @@
 global using scribal.Shared;
 global using Microsoft.EntityFrameworkCore;
+global using scribal.Server.Data;
 using Microsoft.AspNetCore.ResponseCompression;
-using scribal.Server.Data;
+
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using scribal.Server.Data;
 
 namespace scribal.Server.Controllers
 {
@@ -7,28 +8,18 @@ namespace scribal.Server.Controllers
     [ApiController]
     public class PostController : ControllerBase
     {
-        private static List<Post> Posts = new List<Post>
+        private readonly DataContext _context;
+
+        public PostController(DataContext context)
         {
-            new Post
-            {
-                Id = 1,
-                Title = "Title",
-                Content = "Expedita non rem delectus cumque ab architecto repellendus voluptas. Consequatur eos similique dicta. Ea iure vitae non quos. Cumque magni ullam sint optio sit molestias. Quo quis consequatur recusandae praesentium debitis harum beatae. Doloribus nisi error consectetur aut eveniet tempora omnis nihil.",
-            },
-            new Post
-            {
-                Id = 2,
-                Title = "Title",
-                Content = "Expedita non rem delectus cumque ab architecto repellendus voluptas. Consequatur eos similique dicta. Ea iure vitae non quos. Cumque magni ullam sint optio sit molestias. Quo quis consequatur recusandae praesentium debitis harum beatae. Doloribus nisi error consectetur aut eveniet tempora omnis nihil.",
-            }
-        };
-
-
+            _context = context;
+        }
 
         [HttpGet]
-        public async Task<ActionResult<List<Post>>> GetPost()
+        public async Task<ActionResult<List<Post>>> GetPosts()
         {
-            return Ok(Posts);
+            var posts = await _context.Posts.ToListAsync();
+            return Ok(posts);
         }
     }
 }
