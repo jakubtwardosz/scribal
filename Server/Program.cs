@@ -1,10 +1,16 @@
 global using scribal.Shared;
 global using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.ResponseCompression;
+using scribal.Server.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.AddDbContext<DataContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
