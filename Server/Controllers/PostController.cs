@@ -26,10 +26,9 @@ namespace scribal.Server.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> GetPosts()
+        public async Task<ActionResult<List<Post>>> GetPost()
         {
-            var result = await Task.FromResult(Posts);
-            return Ok(result);
+            return Ok(Posts);
         }
     }
 }
